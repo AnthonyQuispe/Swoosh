@@ -1,0 +1,70 @@
+@use "../../styles/mixins" as *;
+@use "../../styles/variables" as *;
+
+.login-page {
+  background-color: $yellow;
+  height: 100%;
+  min-height: 100dvh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 100px 0 0 0;
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    background-color: $primary-background;
+    padding: 50px;
+    border-radius: 50px;
+    gap: 40px;
+    width: 100%;
+    min-height: fit-content;
+    height: calc(100vh - 100px);
+    max-width: 430px;
+    max-height: 832px;
+
+    @include Phone {
+      border-radius: 50px 0 0 0;
+    }
+
+    @include Tablet {
+      border-radius: 50px;
+    }
+
+    &-title {
+      color: $white;
+      font-size: 1.6875rem;
+      text-align: center;
+    }
+    &-description {
+      color: $white;
+      text-align: center;
+      text-transform: capitalize;
+
+      &--red {
+        color: $red;
+        text-align: left;
+      }
+    }
+    &-input {
+      @include input;
+    }
+
+    &-button {
+      @include btn;
+    }
+  }
+
+  &__link {
+    color: $white;
+    text-align: center;
+    text-transform: capitalize;
+
+    &--green {
+      color: $green;
+    }
+    &--yellow {
+      color: $yellow;
+    }
+  }
+}

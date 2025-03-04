@@ -1,0 +1,59 @@
+@use "./variables" as *;
+
+@mixin Phone {
+  @media screen and (max-width: 430px) {
+    @content;
+  }
+}
+
+@mixin Tablet {
+  @media screen and (min-width: 768px) {
+    @content;
+  }
+}
+
+@mixin Desktop {
+  @media screen and (min-width: 1280px) {
+    @content;
+  }
+}
+
+@mixin btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 1rem;
+  background-color: $blue;
+  border: none;
+  height: 50px;
+  transition: background 0.3s ease;
+  cursor: pointer;
+  color: white;
+
+  &:hover {
+    background-color: darken($blue, 10%);
+  }
+}
+
+@mixin input {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0px 8px;
+  font-size: 1rem;
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid $white;
+  height: 50px;
+  color: $white;
+
+  &::placeholder {
+    color: $white;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}

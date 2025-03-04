@@ -1,0 +1,8 @@
+node_modules
+.env
+/build
+/node_modules
+.firebase
+public/.DS_Store
+
+.DS_Store

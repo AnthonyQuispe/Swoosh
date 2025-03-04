@@ -1,0 +1,18 @@
+@use "../../styles/mixins" as *;
+@use "../../styles/variables" as *;
+
+.google-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 1rem;
+  background-color: $white;
+  border: none;
+  height: 50px;
+  transition: background 0.3s ease;
+  cursor: pointer;
+  color: $gray;
+}
