@@ -12,6 +12,7 @@
   background-color: transparent;
   position: absolute;
   top: 0;
+  z-index: 1;
 
   &__buttons {
     width: 50px;
