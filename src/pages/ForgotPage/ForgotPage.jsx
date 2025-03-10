@@ -1,14 +1,22 @@
 import "./ForgotPage.scss";
 import { Link } from "react-router-dom";
-import GoogleButton from "../../components/GoogleButton/GoogleButton";
+import { sendPasswordResetEmail } from "../../firebase/FirebaseForget";
 import { useState } from "react";
 
 export default function ForgotPage() {
   const [formError, setFormError] = useState(false);
+  const [email, setEmail] = useState("");
 
   const handleformSubmit = (e) => {
     e.preventDefault();
+
+    sendPasswordResetEmail(email, setEmail)
+      .then(() => {})
+      .catch((error) => {
+        console.error(error);
+      });
   };
+
   return (
     <main className="forgot-page">
       <form className="forgot-page__form" onSubmit={handleformSubmit}>
@@ -31,12 +39,12 @@ export default function ForgotPage() {
           className="forgot-page__form-input"
           type="email"
           autoComplete="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
-
         <button className="forgot-page__form-button" type="submit">
           Send
         </button>
-
         <Link className="forgot-page__link" to="/login">
           Go Back
         </Link>

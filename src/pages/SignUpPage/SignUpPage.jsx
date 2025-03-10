@@ -46,7 +46,7 @@ export default function SignUpPage() {
             value="privacy&terms"
           />
           <label
-            htmlfor="privacy&terms"
+            htmlFor="privacy&terms"
             className="signup-page__form-checkbox-label"
           >
             I've read and agree with the{" "}
