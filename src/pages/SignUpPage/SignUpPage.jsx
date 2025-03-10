@@ -14,7 +14,6 @@ export default function SignUpPage() {
     <main className="signup-page">
       <form className="signup-page__form" onSubmit={handleformSubmit}>
         <h1 className="signup-page__form-title">Create Account</h1>
-        <p className="signup-page__form-description">Sign Up To Get Started</p>
         {formError && (
           <p className="signup-page__form-description signup-page__form-description--red">
             Please Enter a Valid Email and Password And Try Again
@@ -38,12 +37,7 @@ export default function SignUpPage() {
           type="password"
           autoComplete="new-password"
         />
-        <input
-          placeholder="Confirm Password"
-          className="signup-page__form-input"
-          type="password"
-          autoComplete="new-password"
-        />
+
         <div className="signup-page__form-checkbox">
           <input
             type="checkbox"
@@ -70,7 +64,7 @@ export default function SignUpPage() {
           Sign Up
         </button>
         <GoogleButton />
-        <Link className="signup-page__link">
+        <Link className="signup-page__link" to="/login">
           Already have an account?
           <span className="signup-page__link--yellow"> Log In</span>
         </Link>
