@@ -45,6 +45,9 @@
   font-size: 1rem;
   background-color: transparent;
   border: none;
+  border-radius: 0;
+
+  outline: none !important;
   border-bottom: 2px solid $white;
   height: 50px;
   color: $white;
@@ -56,4 +59,9 @@
   &:focus {
     outline: none;
   }
+}
+
+input:-webkit-autofill {
+  box-shadow: 0 0 0px 1000px $primary-background inset !important;
+  -webkit-text-fill-color: $white !important;
 }

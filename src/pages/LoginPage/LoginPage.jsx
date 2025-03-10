@@ -1,17 +1,27 @@
 import "./LoginPage.scss";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import GoogleButton from "../../components/GoogleButton/GoogleButton";
+import { FirebaseLogin } from "../../firebase/FirebaseLogin";
 import { useState } from "react";
 
 export default function LoginPage() {
   const [formError, setFormError] = useState(false);
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const navigate = useNavigate();
 
-  const handleformSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
+    try {
+      await FirebaseLogin(email, password, navigate);
+    } catch (error) {
+      console.error(error);
+      setFormError(true);
+    }
   };
   return (
     <main className="login-page">
-      <form className="login-page__form" onSubmit={handleformSubmit}>
+      <form className="login-page__form" onSubmit={handleFormSubmit}>
         <h1 className="login-page__form-title">Welcome</h1>
         <p className="login-page__form-description">
           Enter your credentials to continue
@@ -26,12 +36,16 @@ export default function LoginPage() {
           className="login-page__form-input"
           type="email"
           autoComplete="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
         <input
           placeholder="Password"
           className="login-page__form-input"
           type="password"
           autoComplete="current-password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
         />
         <Link className="login-page__link login-page__link--green" to="/forgot">
           Forgot password?
