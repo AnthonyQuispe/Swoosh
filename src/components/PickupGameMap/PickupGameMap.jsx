@@ -84,6 +84,13 @@ export default function PickupGameMap() {
               zoomControl: false,
               streetViewControl: false,
               rotateControl: false,
+              styles: [
+                {
+                  featureType: "poi",
+                  elementType: "labels",
+                  stylers: [{ visibility: "off" }],
+                },
+              ],
             }}
           >
             {markers.map((marker) => (

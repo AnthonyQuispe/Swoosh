@@ -96,3 +96,7 @@
 .location-button:hover {
   background-color: #0c0f14a6;
 }
+
+.gm-style .gm-style-iw-tc::after {
+  background: $primary-background;
+}

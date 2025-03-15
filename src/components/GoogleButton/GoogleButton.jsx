@@ -15,7 +15,6 @@ export default function GoogleButton() {
       .then(async (result) => {
         const user = result.user;
         const userRef = doc(db, "users", user.uid);
-
         const userData = {
           email: user.email,
         };
