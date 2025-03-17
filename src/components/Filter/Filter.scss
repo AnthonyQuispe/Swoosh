@@ -1,0 +1,75 @@
+@use "../../styles/mixins" as *;
+@use "../../styles/variables" as *;
+
+.filter {
+  width: 100%;
+  height: fit-content;
+  background-color: $primary-background;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  &-header {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+
+    &-buttons {
+      border: none;
+      background: transparent;
+      color: $red;
+      font-size: 1.5rem;
+    }
+
+    &-title {
+      color: $white;
+      font-size: 1.25rem;
+    }
+  }
+
+  &-section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    &-title {
+      color: $white;
+      font-size: 1rem;
+    }
+
+    &-button-container {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    &-button {
+      background-color: $primary-background;
+      color: $white;
+      border-color: $white;
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 1rem;
+
+      &--active {
+        color: $yellow;
+        border-color: $yellow;
+      }
+    }
+  }
+
+  &-submit {
+    background-color: $dark-green;
+    color: $green;
+    border-radius: 5px;
+    padding: 10px;
+    border: none;
+    font-size: 1rem;
+  }
+}

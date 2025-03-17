@@ -1,19 +1,16 @@
 import "./LandingPage.scss";
 import SwooshLogo from "../../assets/logos/SwooshLogo.svg";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 export default function LandingPage() {
-  const [isUserLogin, setIsUserLogin] = useState(false);
+  const isUserLogin = useSelector((state) => state.auth.isUserLogin);
   const navigate = useNavigate();
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      if (isUserLogin) {
-        navigate("/home");
-      } else {
-        navigate("/login");
-      }
+      navigate(isUserLogin ? "/dashboard" : "/login");
     }, 3000);
 
     return () => clearTimeout(timer);
