@@ -1,0 +1,74 @@
+@use "../../styles/mixins" as *;
+@use "../../styles/variables" as *;
+
+.game-form {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: $primary-background;
+  z-index: 1000;
+  width: 100%;
+  max-width: 320px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+
+  &__container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  &__containers {
+    display: flex;
+    gap: 10px;
+  }
+
+  &__title {
+    color: $white;
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  &__label {
+    color: $white;
+    font-size: 1rem;
+    text-align: center;
+  }
+
+  &__input {
+    border: none;
+    padding: 0 8px;
+    border-radius: 5px;
+    outline: none;
+    background-color: $white;
+  }
+
+  &__select {
+    border-radius: 5px;
+  }
+
+  &__button {
+    background-color: $dark-green;
+    color: $green;
+    width: fit-content;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    margin: 0 auto;
+
+    &-cancel {
+      background-color: transparent;
+      border: none;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      height: 25px;
+      width: 25px;
+    }
+  }
+}

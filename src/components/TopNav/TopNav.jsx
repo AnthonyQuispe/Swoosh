@@ -1,7 +1,7 @@
 import "./TopNav.scss";
 import React, { useState } from "react";
-import FilterIcon from "../../assets/icons/FilterIcon.png";
-import SettingIcon from "../../assets/icons/SettingsIcon.png";
+import FilterIcon from "../../assets/icons/FilterIcon.svg";
+import SettingIcon from "../../assets/icons/SettingsIcon.svg";
 import Filter from "../Filter/Filter";
 
 export default function TopNav() {

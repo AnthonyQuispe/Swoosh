@@ -7,18 +7,20 @@ import {
   InfoWindow,
 } from "@react-google-maps/api";
 
+import GameForm from "../GameForm/GameForm";
 import Players from "../../assets/icons/Players.png";
 import Time from "../../assets/icons/TimeIcon.png";
 
 export default function PickupGameMap() {
   const defaultCenter = { lat: 40.7128, lng: -74.006 };
   const mapContainerStyle = { width: "100%", height: "100%" };
-
   const [center, setCenter] = useState(defaultCenter);
   const [markers, setMarkers] = useState([]);
   const [selectedMarker, setSelectedMarker] = useState(null);
   const [permissionGranted, setPermissionGranted] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [showForm, setShowForm] = useState(false);
+  const [newMarkerLocation, setNewMarkerLocation] = useState(null);
 
   const requestLocation = () => {
     if (!navigator.geolocation) {
@@ -46,17 +48,23 @@ export default function PickupGameMap() {
 
   // Function to add a marker when user clicks on the map
   const onMapClick = useCallback((event) => {
-    const newMarker = {
-      id: Date.now(),
+    setNewMarkerLocation({
       lat: event.latLng.lat(),
       lng: event.latLng.lng(),
-      sport: "Basketball",
-      players: "5/10",
-      gameName: "3v3 Pickup",
-      time: "3:45pm - 5:00 pm",
+    });
+    setShowForm(true);
+  }, []);
+
+  const handleAddGame = (gameData) => {
+    const newMarker = {
+      id: Date.now(),
+      lat: newMarkerLocation.lat,
+      lng: newMarkerLocation.lng,
+      ...gameData,
     };
     setMarkers((prev) => [...prev, newMarker]);
-  }, []);
+    setShowForm(false);
+  };
 
   return (
     <div className="google-map">
@@ -127,12 +135,18 @@ export default function PickupGameMap() {
                       alt="Sport"
                     />
                     <p className="google-map__info-time">
-                      {selectedMarker.time}
+                      {selectedMarker.startTime}
                     </p>
                   </div>
                   <button className="google-map__info-button">Join</button>
                 </div>
               </InfoWindow>
+            )}
+            {showForm && (
+              <GameForm
+                onAddGame={handleAddGame}
+                onClose={() => setShowForm(false)}
+              />
             )}
           </GoogleMap>
         </LoadScript>

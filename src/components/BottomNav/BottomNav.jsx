@@ -1,9 +1,9 @@
 import "./BottomNav.scss";
 import React, { useState } from "react";
-import ChatIcon from "../../assets/icons/ChatIcon.png";
-import ChatIconActive from "../../assets/icons/ChatIconActive.png";
+import ChatIcon from "../../assets/icons/ChatIcon.svg";
+import ChatIconActive from "../../assets/icons/ChatIconActive.svg";
 import HomeIcon from "../../assets/icons/HomeIcon.png";
-import HomeIconActive from "../../assets/icons/HomeIconActive.png";
+import HomeIconActive from "../../assets/icons/HomeIconActive.svg";
 import LeaderboardIcon from "../../assets/icons/Leaderboard.png";
 import LeaderboardIconActive from "../../assets/icons/LeaderboardActive.png";
 import ProfileIcon from "../../assets/icons/ProfileIcon.png";
