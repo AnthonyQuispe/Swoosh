@@ -7,9 +7,14 @@ import {
   InfoWindow,
 } from "@react-google-maps/api";
 
-import GameForm from "../GameForm/GameForm";
+import GameForm, { getMaxPlayers } from "../GameForm/GameForm";
 import Players from "../../assets/icons/Players.png";
 import Time from "../../assets/icons/TimeIcon.png";
+import BasketballIcon from "../../assets/sports/BasketballIcon.svg";
+import Football from "../../assets/sports/FootballIcon.svg";
+import TennisIcon from "../../assets/sports/TennisIcon.svg";
+import SoccerIcon from "../../assets/sports/SoccerIcon.svg";
+import PickleballIcon from "../../assets/sports/PickleBallIcon.svg";
 
 export default function PickupGameMap() {
   const defaultCenter = { lat: 40.7128, lng: -74.006 };
@@ -21,6 +26,23 @@ export default function PickupGameMap() {
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
   const [newMarkerLocation, setNewMarkerLocation] = useState(null);
+
+  const sportIcons = {
+    Basketball: BasketballIcon,
+    Football: Football,
+    Soccer: SoccerIcon,
+    Pickleball: PickleballIcon,
+    Tennis: TennisIcon,
+  };
+
+  const formatTime = (time) => {
+    if (!time) return "";
+    const [hour, minute] = time.split(":");
+    const hourInt = parseInt(hour, 10);
+    const period = hourInt >= 12 ? "PM" : "AM";
+    const formattedHour = hourInt % 12 || 12;
+    return `${formattedHour}:${minute} ${period}`;
+  };
 
   const requestLocation = () => {
     if (!navigator.geolocation) {
@@ -56,11 +78,14 @@ export default function PickupGameMap() {
   }, []);
 
   const handleAddGame = (gameData) => {
+    const maxPlayers = getMaxPlayers(gameData.sport, gameData.gameName) || 0;
     const newMarker = {
       id: Date.now(),
       lat: newMarkerLocation.lat,
       lng: newMarkerLocation.lng,
       ...gameData,
+      maxPlayers: maxPlayers,
+      currentPlayers: maxPlayers - gameData.players, // Calculate current players dynamically
     };
     setMarkers((prev) => [...prev, newMarker]);
     setShowForm(false);
@@ -106,6 +131,10 @@ export default function PickupGameMap() {
                 key={marker.id}
                 position={{ lat: marker.lat, lng: marker.lng }}
                 onClick={() => setSelectedMarker(marker)}
+                icon={{
+                  url: sportIcons[marker.sport] || BasketballIcon, // Default to Basketball if sport is missing
+                  scaledSize: new window.google.maps.Size(40, 40), // Adjust marker size
+                }}
               />
             ))}
 
@@ -125,7 +154,8 @@ export default function PickupGameMap() {
                       src={Players}
                     />
                     <p className="google-map__info-players">
-                      {selectedMarker.players}
+                      {selectedMarker.currentPlayers} /{" "}
+                      {selectedMarker.maxPlayers} Players
                     </p>
                   </div>
                   <div className="google-map__info-container">
@@ -135,7 +165,7 @@ export default function PickupGameMap() {
                       alt="Sport"
                     />
                     <p className="google-map__info-time">
-                      {selectedMarker.startTime}
+                      {formatTime(selectedMarker.startTime)}
                     </p>
                   </div>
                   <button className="google-map__info-button">Join</button>

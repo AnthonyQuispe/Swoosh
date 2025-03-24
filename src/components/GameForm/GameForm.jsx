@@ -2,6 +2,17 @@ import React, { useState } from "react";
 import "./GameForm.scss";
 import CloseButton from "../../assets/icons/CloseIcon.svg";
 
+export const getMaxPlayers = (sport, gameMode) => {
+  const gamePlayerLimits = {
+    Basketball: { "1v1": 2, "3v3": 6, "5v5": 10 },
+    Football: { "2v2": 4, "4v4": 8, "11v11": 22 },
+    Soccer: { "3v3": 6, "5v5": 10, "7v7": 14, "11v11": 22 },
+    Pickleball: { Singles: 2, Doubles: 4 },
+    Tennis: { Singles: 2, Doubles: 4 },
+  };
+  return gamePlayerLimits[sport]?.[gameMode] || null;
+};
+
 export default function GameForm({ onAddGame, onClose }) {
   const [formData, setFormData] = useState({
     sport: "",
@@ -9,52 +20,41 @@ export default function GameForm({ onAddGame, onClose }) {
     startTime: "",
     gameName: "",
     players: "",
+    currentPlayers: 0,
+    maxPlayers: 0,
   });
+  const [currentPlayers, setCurrentPlayers] = useState(0);
 
   const gameModes = {
-    Basketball: ["1v1", "3v3", "5v5 (Full Game)", "First to 21", "HORSE"],
-    Football: [
-      "Flag Football",
-      "2v2",
-      "4v4",
-      "Touch Football",
-      "11v11 (Full Game)",
-    ],
-    Soccer: ["3v3", "5v5", "7v7", "First to 3 Goals", "11v11 (Full Game)"],
+    Basketball: ["1v1", "3v3", "5v5", "First to 21", "HORSE"],
+    Football: ["Flag Football", "2v2", "4v4", "Touch Football", "11v11"],
+    Soccer: ["3v3", "5v5", "7v7", "First to 3 Goals", "11v11"],
     Pickleball: ["Singles", "Doubles", "First to 11"],
     Tennis: ["Singles", "Doubles", "First to 6 Games"],
   };
 
-  const getMaxPlayers = (sport, gameMode) => {
-    const gamePlayerLimits = {
-      Basketball: { "1v1": 2, "3v3": 6, "5v5 (Full Game)": 10 },
-      Football: { "2v2": 4, "4v4": 8, "11v11 (Full Game)": 22 },
-      Soccer: { "3v3": 6, "5v5": 10, "7v7": 14, "11v11 (Full Game)": 22 },
-      Pickleball: { Singles: 2, Doubles: 4 },
-      Tennis: { Singles: 2, Doubles: 4 },
-    };
-    return gamePlayerLimits[sport]?.[gameMode] || null;
-  };
-
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-      ...(name === "sport" ? { gameName: "", players: "" } : {}),
-      ...(name === "gameName"
-        ? {
-            players: getMaxPlayers(formData.sport, value)
-              ? getMaxPlayers(formData.sport, value) - 1
-              : "",
-          }
-        : {}),
-    }));
+    setFormData((prev) => {
+      const updatedData = { ...prev, [name]: value };
+
+      if (name === "gameName") {
+        const maxPlayers = getMaxPlayers(prev.sport, value);
+        updatedData.maxPlayers = maxPlayers;
+        updatedData.currentPlayers = maxPlayers - prev.players;
+      }
+
+      return updatedData;
+    });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onAddGame(formData);
+    onAddGame({
+      ...formData,
+      currentPlayers: formData.maxPlayers - formData.players,
+      maxPlayers: formData.maxPlayers,
+    });
     onClose();
   };
 
@@ -90,7 +90,7 @@ export default function GameForm({ onAddGame, onClose }) {
               className="game-form__select"
               disabled={!formData.sport}
             >
-              <option value="">Select a game mode</option>
+              <option value="">Select Game Mode</option>
               {gameModes[formData.sport]?.map((mode) => (
                 <option key={mode} value={mode}>
                   {mode}
@@ -103,12 +103,15 @@ export default function GameForm({ onAddGame, onClose }) {
             <select
               name="players"
               value={formData.players}
-              onChange={handleChange}
+              onChange={(e) => {
+                setFormData({ ...formData, players: e.target.value });
+                setCurrentPlayers(e.target.value);
+              }}
               required
               className="game-form__select"
               disabled={!formData.gameName}
             >
-              <option value="">Select players</option>
+              <option value="">Select</option>
               {(() => {
                 const maxPlayers = getMaxPlayers(
                   formData.sport,
@@ -116,9 +119,9 @@ export default function GameForm({ onAddGame, onClose }) {
                 );
                 if (!maxPlayers || maxPlayers <= 1) return null; // Prevents invalid array length
 
-                return [...Array(maxPlayers - 1)].map((_, i) => (
+                return [...Array(maxPlayers)].map((_, i) => (
                   <option key={i + 1} value={i + 1}>
-                    {i + 1}
+                    {i + 1} / {maxPlayers}
                   </option>
                 ));
               })()}
