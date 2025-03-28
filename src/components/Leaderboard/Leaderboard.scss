@@ -1,0 +1,28 @@
+@use "../../styles/mixins" as *;
+@use "../../styles/variables" as *;
+
+.leaderboard {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  &__podium {
+    padding: 20px;
+    width: 100%;
+
+    &-rank {
+      background-color: $white;
+      padding: 10px 15px;
+      width: fit-content;
+      border: $green 2px solid;
+      border-radius: 10px;
+    }
+  }
+
+  &__entries {
+    width: 100%;
+    background-color: $white;
+    border-radius: 20px 20px 0 0;
+  }
+}

@@ -1,4 +1,4 @@
-import "./Profile.scss";
+import "./PublicProfile.scss";
 import ProfileImage from "../../assets/icons/ProfileImage.svg";
 
 export default function Profile() {

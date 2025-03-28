@@ -10,6 +10,7 @@ import ProfileIcon from "../../assets/icons/ProfileIcon.png";
 import ProfileIconActive from "../../assets/icons/ProfileIconActive.png";
 import PickupGameMap from "../../components/PickupGameMap/PickupGameMap";
 import Profile from "../../components/Profile/Profile";
+import Leaderboard from "../Leaderboard/Leaderboard";
 
 export default function BottomNav({ setActiveComponent }) {
   const [activeTab, setActiveTab] = useState("home");
@@ -31,7 +32,7 @@ export default function BottomNav({ setActiveComponent }) {
       id: "leaderboard",
       icon: LeaderboardIcon,
       activeIcon: LeaderboardIconActive,
-      component: <h1>Leaderboard</h1>,
+      component: <Leaderboard />,
     },
     {
       id: "chat",
