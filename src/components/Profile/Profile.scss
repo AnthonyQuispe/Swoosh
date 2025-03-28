@@ -1,2 +1,130 @@
 @use "../../styles/mixins" as *;
 @use "../../styles/variables" as *;
+
+.profile {
+  background-color: $primary-background;
+  min-height: 100vh;
+  height: 100%;
+  overflow-y: auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
+  padding-bottom: 70px;
+
+  @include Tablet {
+    min-height: unset;
+  }
+
+  &__container {
+    display: flex;
+    width: 80%;
+    max-width: 325px;
+    position: relative;
+  }
+  &__username {
+    color: $white;
+  }
+  &__rank {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    top: -20px;
+    left: -10%;
+
+    &-title {
+      color: $white;
+    }
+    &-number {
+      color: transparent;
+      -webkit-text-stroke: 2px $primary-background;
+      line-height: auto;
+      font-size: 3rem;
+      &-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: $white;
+        height: 60px;
+        width: 60px;
+        border-radius: 100%;
+        border: $blue 2px solid;
+      }
+    }
+
+    &-sport {
+      color: $white;
+    }
+  }
+
+  &__name {
+    color: $white;
+    font-size: 24px;
+
+    &-container {
+      border: $yellow 2px solid;
+      width: 100%;
+      height: 70px;
+      align-items: center;
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid $white;
+    border-radius: 20px;
+    justify-content: center;
+    align-items: center;
+    max-width: 390px;
+    width: 90%;
+    gap: 10px;
+    margin-top: 20px;
+    padding: 20px 10px;
+  }
+
+  &__city {
+    color: $white;
+  }
+  &__bio {
+    color: $white;
+
+    &-container {
+      width: 90%;
+      border: $white 2px solid;
+      border-radius: 10px;
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  &__stats {
+    display: flex;
+    gap: 10px;
+    width: 90%;
+    justify-content: center;
+  }
+
+  &__stat {
+    border: $white 2px solid;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    align-items: center;
+
+    &-title {
+      color: $white;
+    }
+    &-number {
+      color: $green;
+    }
+  }
+}

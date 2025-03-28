@@ -8,19 +8,37 @@ import LeaderboardIcon from "../../assets/icons/Leaderboard.png";
 import LeaderboardIconActive from "../../assets/icons/LeaderboardActive.png";
 import ProfileIcon from "../../assets/icons/ProfileIcon.png";
 import ProfileIconActive from "../../assets/icons/ProfileIconActive.png";
+import PickupGameMap from "../../components/PickupGameMap/PickupGameMap";
+import Profile from "../../components/Profile/Profile";
 
-export default function BottomNav() {
+export default function BottomNav({ setActiveComponent }) {
   const [activeTab, setActiveTab] = useState("home");
 
   const navItems = [
-    { id: "home", icon: HomeIcon, activeIcon: HomeIconActive },
-    { id: "profile", icon: ProfileIcon, activeIcon: ProfileIconActive },
+    {
+      id: "home",
+      icon: HomeIcon,
+      activeIcon: HomeIconActive,
+      component: <PickupGameMap />,
+    },
+    {
+      id: "profile",
+      icon: ProfileIcon,
+      activeIcon: ProfileIconActive,
+      component: <Profile />,
+    },
     {
       id: "leaderboard",
       icon: LeaderboardIcon,
       activeIcon: LeaderboardIconActive,
+      component: <h1>Leaderboard</h1>,
     },
-    { id: "chat", icon: ChatIcon, activeIcon: ChatIconActive },
+    {
+      id: "chat",
+      icon: ChatIcon,
+      activeIcon: ChatIconActive,
+      component: <h1>Chat</h1>,
+    },
   ];
 
   return (
@@ -31,7 +49,10 @@ export default function BottomNav() {
           className={`bottom-nav__buttons ${
             activeTab === item.id ? "bottom-nav__buttons--active" : ""
           }`}
-          onClick={() => setActiveTab(item.id)}
+          onClick={() => {
+            setActiveTab(item.id);
+            setActiveComponent(item.component);
+          }}
         >
           <img
             src={activeTab === item.id ? item.activeIcon : item.icon}

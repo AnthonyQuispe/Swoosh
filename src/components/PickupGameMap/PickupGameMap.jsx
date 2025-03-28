@@ -15,6 +15,7 @@ import Football from "../../assets/sports/FootballIcon.svg";
 import TennisIcon from "../../assets/sports/TennisIcon.svg";
 import SoccerIcon from "../../assets/sports/SoccerIcon.svg";
 import PickleballIcon from "../../assets/sports/PickleBallIcon.svg";
+import TopNav from "../TopNav/TopNav";
 
 export default function PickupGameMap() {
   const defaultCenter = { lat: 40.7128, lng: -74.006 };
@@ -93,6 +94,7 @@ export default function PickupGameMap() {
 
   return (
     <div className="google-map">
+      <TopNav />
       {!permissionGranted && (
         <div className="location-overlay">
           <button className="location-button" onClick={requestLocation}>
@@ -140,7 +142,10 @@ export default function PickupGameMap() {
 
             {selectedMarker && (
               <InfoWindow
-                position={{ lat: selectedMarker.lat, lng: selectedMarker.lng }}
+                position={{
+                  lat: selectedMarker.lat,
+                  lng: selectedMarker.lng,
+                }}
                 onCloseClick={() => setSelectedMarker(null)}
               >
                 <div className="google-map__info">
