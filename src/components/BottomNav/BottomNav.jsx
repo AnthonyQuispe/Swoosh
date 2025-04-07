@@ -10,7 +10,7 @@ import ProfileIcon from "../../assets/icons/ProfileIcon.png";
 import ProfileIconActive from "../../assets/icons/ProfileIconActive.png";
 import PickupGameMap from "../../components/PickupGameMap/PickupGameMap";
 import Profile from "../../components/Profile/Profile";
-import Leaderboard from "../Leaderboard/Leaderboard";
+import Leaderboard from "../../components/Leaderboard/Leaderboard";
 
 export default function BottomNav({ setActiveComponent }) {
   const [activeTab, setActiveTab] = useState("home");
