@@ -1,29 +1,23 @@
 import "./Profile.scss";
 import ProfileImage from "../../assets/icons/ProfileImage.svg";
 import { useSelector, useDispatch } from "react-redux";
-import { setProfileData } from "../../features/profile/profileSlice";
+import { loadProfileFromFirestore } from "../../firebase/FirebaseProfile";
 import { useEffect } from "react";
+import { getAuth } from "firebase/auth";
 
 export default function Profile() {
   const userProfile = useSelector((state) => state.profile);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(
-      setProfileData({
-        username: "coolkid",
-        name: "Cory Thompson",
-        avatar: "url",
-        city: "Miami",
-        bio: "Hard work...",
-        rank: 1,
-        stats: {
-          followers: 10000,
-          following: 100,
-          matches: 112,
-        },
-      })
-    );
+    const auth = getAuth();
+    const user = auth.currentUser;
+
+    if (user) {
+      loadProfileFromFirestore(user.uid, dispatch);
+    } else {
+      console.log("No user is signed in.");
+    }
   }, [dispatch]);
 
   return (

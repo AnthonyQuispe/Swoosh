@@ -17,6 +17,11 @@ export default function GoogleButton() {
         const userRef = doc(db, "users", user.uid);
         const userData = {
           email: user.email,
+          name: user.displayName || "",
+          avatar: user.photoURL || "",
+          username: user.email.split("@")[0],
+          rank: 0,
+          city: "",
         };
 
         await setDoc(userRef, userData, { merge: true });
@@ -24,7 +29,6 @@ export default function GoogleButton() {
         navigate("/dashboard", {
           state: {
             userEmail: auth.currentUser.email,
-            displayName: user.displayName,
           },
         });
       })
