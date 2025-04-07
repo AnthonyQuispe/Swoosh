@@ -31,10 +31,6 @@
       border-radius: 50px 0 0 0;
     }
 
-    @include Tablet {
-      border-radius: 50px;
-    }
-
     &-title {
       color: $white;
       font-size: 1.6875rem;

@@ -9,11 +9,11 @@ import "./styles/_global.scss";
 export default function App() {
   return (
     <Routes>
-      <Route path="/" element={<LandingPage />} />;
-      <Route path="/login" element={<LoginPage />} />;
-      <Route path="/signup" element={<SignupPage />} />;
-      <Route path="/forgot" element={<ForgotPage />} />;
-      <Route path="/dashboard" element={<DashboardPage />} />;
+      <Route path="/" element={<LandingPage />} />
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/signup" element={<SignupPage />} />
+      <Route path="/forgot" element={<ForgotPage />} />
+      <Route path="/dashboard" element={<DashboardPage />} />
     </Routes>
   );
 }

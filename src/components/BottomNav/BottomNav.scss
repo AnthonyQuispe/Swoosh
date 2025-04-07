@@ -2,21 +2,17 @@
 @use "../../styles/variables" as *;
 
 .bottom-nav {
-  padding: 0 25px;
+  padding: 0 50px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  position: fixed;
+  position: absolute;
   bottom: 0;
   width: 100%;
   max-width: 430px;
   height: 100px;
   background-color: $primary-background;
-
-  @include Tablet {
-    position: absolute;
-  }
 
   &__buttons {
     width: 50px;
