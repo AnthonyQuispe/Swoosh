@@ -15,7 +15,7 @@ import Football from "../../assets/sports/FootballIcon.svg";
 import TennisIcon from "../../assets/sports/TennisIcon.svg";
 import SoccerIcon from "../../assets/sports/SoccerIcon.svg";
 import PickleballIcon from "../../assets/sports/PickleBallIcon.svg";
-import TopNav from "../TopNav/TopNav";
+import TopNav from "../TopNavAlt/TopNav";
 
 export default function PickupGameMap() {
   const defaultCenter = { lat: 40.7128, lng: -74.006 };

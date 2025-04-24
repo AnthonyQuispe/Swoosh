@@ -22,10 +22,12 @@ export default function LoginPage() {
   return (
     <main className="login-page">
       <form className="login-page__form" onSubmit={handleFormSubmit}>
-        <h1 className="login-page__form-title">Welcome</h1>
-        <p className="login-page__form-description">
-          Enter your credentials to continue
-        </p>
+        <div className="login-page__form-container">
+          <h1 className="login-page__form-title">Welcome</h1>
+          <p className="login-page__form-description">
+            Enter your credentials to continue
+          </p>
+        </div>
         {formError && (
           <p className="login-page__form-description login-page__form-description--red">
             Please Enter a Valid Email and Password And Try Again

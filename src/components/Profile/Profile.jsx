@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { loadProfileFromFirestore } from "../../firebase/FirebaseProfile";
 import { useEffect } from "react";
 import { getAuth } from "firebase/auth";
+import TopNav from "../TopNav/TopNav";
 
 export default function Profile() {
   const userProfile = useSelector((state) => state.profile);
@@ -22,6 +23,7 @@ export default function Profile() {
 
   return (
     <div className="profile">
+      <TopNav />
       <p className="profile__username">@{userProfile.username}</p>
       <div className="profile__avatar">
         <img src={ProfileImage} />

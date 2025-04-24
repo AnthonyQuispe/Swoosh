@@ -1,14 +1,20 @@
 import "./TopNav.scss";
 import React, { useState } from "react";
 import FilterIcon from "../../assets/icons/FilterIcon.svg";
-import SettingIcon from "../../assets/icons/SettingsIcon.svg";
+import RefreshIcon from "../../assets/icons/RefreshIcon.svg";
 import Filter from "../Filter/Filter";
 
 export default function TopNav() {
   const [showFilter, setShowFilter] = useState(false);
 
   const navItems = [
-    { id: "setting", icon: SettingIcon, class: "top-nav__buttons--right" },
+    {
+      id: "filter",
+      icon: FilterIcon,
+      class: "top-nav__buttons--left",
+      action: () => setShowFilter(!showFilter),
+    },
+    { id: "refresh", icon: RefreshIcon, class: "top-nav__buttons--right" },
   ];
 
   return (
